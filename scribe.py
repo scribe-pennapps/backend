@@ -67,7 +67,7 @@ def get_website(page):
     
 @app.route('/css/<page>')
 def get_css(page):
-    return 
+    return '// Who the hell wants actually dynamically-generated CSS!?!'
 
 
 if __name__ == '__main__':
