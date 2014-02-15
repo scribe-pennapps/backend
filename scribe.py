@@ -11,6 +11,7 @@ from flask import render_template
 from pymongo import MongoClient
 
 import json
+import random
 import string
 
 
@@ -31,6 +32,7 @@ def random_string(length=8):
 @app.route('/')
 def main():
     # TODO: make this beautifuler
+    response = 
     return 'Watch the magic ensue.'
 
 @app.route('/make_site', methods=['POST'])
