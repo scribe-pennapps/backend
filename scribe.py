@@ -32,8 +32,9 @@ def random_string(length=8):
 @app.route('/')
 def main():
     # TODO: make this beautifuler
-    response = 
-    return 'Watch the magic ensue.'
+    response = make_response('Watch the magic ensue.', 200)
+    response.headers['Content-Type'] = 'text/plain'
+    return response
 
 @app.route('/make_site', methods=['POST'])
 def make_website():
