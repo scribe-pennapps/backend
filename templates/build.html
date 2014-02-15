@@ -1,12 +1,21 @@
+{# Component buildets#}
+{% macro button(content, type='default', size='') %} <button type="button" class="btn btn-{{ type }} {{ size }}">{{ content }}</button> {% endmacro %}
+
+{% macro button_group(buttons) %}
+    <div class="btn-group">
+    {% for button in buttons %}
+        {{ button(button.attr.content, (button.attr.type ) }}
+    {% endfor %}
+    </div>
+{% endmacro %}
+
+
+{# Command mapper #}
 {% macro components(div) %}
     {% for component in div.components %}
         {% if component.type == 'btn-group' %}
-            <div class="btn-group">
-              {% for button in component.buttons%}
-              <button type="button" class="btn btn-default">Left</button>
-              <button type="button" class="btn btn-default">Middle</button>
-              <button type="button" class="btn btn-default">Right</button>
-            </div>
+            {{ button_group(component.attr.buttons) }}
+        {% elif %}
         {% endif %}
     {% endfor %}
 {% endmacro %}
