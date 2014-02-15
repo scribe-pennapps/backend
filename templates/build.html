@@ -1,10 +1,36 @@
 {# Component buildets#}
+
+{% macro navbar(config) %}
+    <nav class="navbar {{ 'navbar-inverse' if config.attr.inverse else 'navbar-default' }} {{ 'navbar-static-top if config.attr['stuck-top'] }}" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#inscription-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            {% if config.attr.title %}
+                <a class="navbar-brand" href="#">{{ config.attr.title }}</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">{{ config.attr.elements[0] }}</a></li>
+                {{% for element in config.attr.elements[1:] %}}
+                    <li><a href="#">{{ element }}</a></li>
+                {{% endfor %}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endmacro %}
+
 {% macro button(content, type='default', size='') %} <button type="button" class="btn btn-{{ type }} {{ size }}">{{ content }}</button> {% endmacro %}
 
 {% macro button_group(buttons) %}
     <div class="btn-group">
     {% for button in buttons %}
-        {{ button(button.attr.content, (button.attr.type ) }}
+        {{ button(button.attr.content, button.attr.type) }}
     {% endfor %}
     </div>
 {% endmacro %}

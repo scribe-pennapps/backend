@@ -46,15 +46,28 @@ def make_website():
         response = {'Error':'Invalid JSON.'}
     # Generate Markup Page
     identifier = random_string()
-    return
+    html = render_template('page.html', screen=content, identifier=identifier)
+    session = {'html':html, 'identifier':identifier}
+    session_id = sessions.insert(session)
+    print 'Created session %s with MongoDB ID %s.' % (identifier, str(session_id))
+
+
 
 @app.route('/p/<page>')
 def get_website(page):
-    pass
+    session = sessions.find_one({'identifier':page})
+    if not session:
+        response = make_response('Shit.', 404)
+        response.headers['Content-Type'] = 'text/plain'
+    else:
+        response = make_response(session['html'])
+        response.headers['Content-Type'] = 'text/html'
+    return response
+
     
 @app.route('/css/<page>')
 def get_css(page):
-    return
+    return 
 
 
 if __name__ == '__main__':
