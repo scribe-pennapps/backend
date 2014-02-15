@@ -46,16 +46,13 @@ def make_website():
         response = {'Error':'Invalid JSON.'}
     # Generate Markup Page
     identifier = random_string()
-    page = markup.page()
-    page.init(title='Inscription',
-              css=['//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', 'c/%s' % identifier)],
-              javascript=['//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js']
+    return
 
 @app.route('/p/<page>')
 def get_website(page):
     pass
     
-@app.route('/c/<page>')
+@app.route('/css/<page>')
 def get_css(page):
     return
 

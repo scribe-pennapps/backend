@@ -1,0 +1,12 @@
+{% macro components(div) %}
+    {% for component in div.components %}
+        {% if component.type == 'btn-group' %}
+            <div class="btn-group">
+              {% for button in component.buttons%}
+              <button type="button" class="btn btn-default">Left</button>
+              <button type="button" class="btn btn-default">Middle</button>
+              <button type="button" class="btn btn-default">Right</button>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
