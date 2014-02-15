@@ -49,7 +49,7 @@ def make_website():
     html = render_template('page.html', screen=content, identifier=identifier)
     session = {'html':html, 'identifier':identifier}
     session_id = sessions.insert(session)
-    print 'Created session %s with MongoDB ID %s.' % (identifier, str(session_id))
+    print('Created session %s with MongoDB ID %s.' % (identifier, str(session_id)))
 
 
 
@@ -74,4 +74,4 @@ if __name__ == '__main__':
     print('Starting Scribe. You are now entering a hard hat area. '
           'Enter at your own risk.')
     app.debug = True
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=5000)
