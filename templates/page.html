@@ -1,22 +1,15 @@
-{% import 'build.html' as build %}
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Inscription {{ identifier }}</title>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/{{ identifier }}">
-        <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{{  }}">
     </head>
     <body>
     {% for element in screen.elements %}
         {% if element.type == 'div' %}
-            {% for component in element.elements %}
-                {% if component.type == 'btn-group' %}
-
-                {% endif %}
-            {% endfor %}
+            {%  %}
         {% endif %}
     {% endfor %}
     </body>
