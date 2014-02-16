@@ -57,7 +57,7 @@ def function():
 
     # Cache has been written. Time to get the real shit going.
     parse = json.loads(subprocess.check_output(['scribe-process', img]))
-    print parse
+    print(parse)
 
     response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
     response.headers['Content-Type'] = 'application/json'
