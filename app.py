@@ -100,7 +100,7 @@ def function():
 
     for div in parse['children'][1:]:
         div_type = item_type(div)
-        if div_type = 'jumbotron':
+        if div_type == 'jumbotron':
             child = {
                 'attr':{
                     'row':True
@@ -121,7 +121,7 @@ def function():
                     }
                 ]
             }
-        elif div_type = 'thumbnail-row':
+        elif div_type == 'thumbnail-row':
             child = {
                 'attr':{
                     'row':True
