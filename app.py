@@ -52,12 +52,14 @@ def function():
     # Prepares session id.
     identifier = random_string()
     img = 'cache/%s.png' % identifier
-    image = request.form.get('image')
-    print(request.form)
+    image = request.files['file']
     if not image:
         response = make_response(json.dumps({'Error':'No image found.'}), 400)
         response.headers['Content-Type'] = 'application/json'
         return response
+    filename = secure_filename('img')
+    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    print(request.form)
     # Incase id is in place
     os.system('rm -rf %s' % img)
     os.system('touch %s' % img)
