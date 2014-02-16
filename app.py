@@ -80,7 +80,12 @@ def function():
     # cache.close()
 
     # Cache has been written. Time to get the real shit going.
-    parse = json.loads(subprocess.check_output(['scribe-process', img]))
+    try:
+        parse = json.loads(subprocess.check_output(['scribe-process', img]))
+    except StandardError as e:
+        response = make_response(json.dumps({'Error':'Please retake the image.'}), 400)
+        response.headers['Content-Type'] = 'application'
+        return response
     print(parse)
 
     # Parse has a lot of stuff I don't actually need. Ignore that.
