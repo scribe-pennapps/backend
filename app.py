@@ -98,7 +98,7 @@ def function():
     screen['navbar']['inverse'] = True
     screen['navbar']['stuck-top'] = True
     screen['navbar']['title'] = 'Scribe' #parse['children'][0]['attr']['content']
-    screen['navbar']['elements'] = ['Home', 'About', 'Contact', 'Unicorns']#parse['children'][0]['attr']['elements']
+    screen['navbar']['elements'] = ['Home', 'About', 'Contact', 'Unicorns'] #parse['children'][0]['attr']['elements']
 
     screen['container'] = dict()
     screen['container']['attr'] = []
