@@ -52,7 +52,7 @@ def function():
     cache = open('cache/%s.png' % identifier, 'wb')
     cache.write(image)
     cache.close()
-    return make_response(status=204)
+    return make_response(None, 204)
 
 
 @app.route('/make_site', methods=['POST'])
