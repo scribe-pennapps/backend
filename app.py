@@ -153,11 +153,12 @@ def function():
     print('Created session %s with MongoDB ID %s.' % (identifier, str(session_id)))
     response = make_response(json.dumps({'Success':'Page generated.', 'SessionID':identifier}))
     response.headers['Content-Type'] = 'application/json'
+    print repsonse
     return response
 
-    response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
-    response.headers['Content-Type'] = 'application/json'
-    return response
+    # response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
+    # response.headers['Content-Type'] = 'application/json'
+    # return response
 
 
 @app.route('/make_site', methods=['POST'])
