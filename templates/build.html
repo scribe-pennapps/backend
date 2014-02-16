@@ -1,7 +1,7 @@
-{# Component buildets#}
+{# Component builders #}
 
 {% macro navbar(config) %}
-    <nav class="navbar {{ 'navbar-inverse' if config.attr.inverse else 'navbar-default' }} {{ 'navbar-static-top' if config.attr['stuck-top'] }}" role="navigation">
+    <nav class="navbar {{ 'navbar-inverse' if config.inverse else 'navbar-default' }} {{ 'navbar-static-top' if config['stuck-top'] }}" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#inscription-collapse">
@@ -10,14 +10,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            {% if config.attr.title %}
-                <a class="navbar-brand" href="#">{{ config.attr.title }}</a>
+            {% if config.title %}
+                <a class="navbar-brand" href="#">{{ config.title }}</a>
             {% endif %}
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="inscription-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">{{ config.attr.elements[0] }}</a></li>
-                {% for element in config.attr.elements[1:] %}
+                    <li class="active"><a href="#">{{ config.elements[0] }}</a></li>
+                {% for element in config.elements[1:] %}
                     <li><a href="#">{{ element }}</a></li>
                 {% endfor %}
                 </ul>
@@ -36,13 +36,22 @@
     </div>
 {% endmacro %}
 
+{% macro jumbotron(heading, subheading, buttontype, buttoncontent) %}
+    <div class="jumbotron">
+        <h1>{{ heading }}</h1>
+        <p>{{ subheading }}</p>
+        {{ button(buttoncontent, buttontype) }}
+    </div>
+{% endmacro %}
 
 {# Command mapper #}
 {% macro components(div) %}
     {% for component in div.components %}
         {% if component.type == 'btn-group' %}
             {{ button_group(component.attr.buttons) }}
-        {% elif %}
+        {% elif component.type == 'jumbotron' %}
+            {{ component }}
+            {{ jumbotron(component.attr.header, component.attr.subheader, component.attr['button-type'], component.attr['button-content']) }}
         {% endif %}
     {% endfor %}
 {% endmacro %}

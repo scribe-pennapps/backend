@@ -1,0 +1,53 @@
+{
+    "navbar": {
+        "inverse": true,
+        "stuck-top": true,
+        "title": true,
+        "elements":[
+            "Hello",
+            "World"
+        ]
+    },
+    "container": {
+        "attr":[],
+        // Children are divs
+        "children":[
+            {
+                "attr":{
+                    "row":true
+                },
+                "children":[],
+                "components":[
+                    {
+                        "type":"jumbotron",
+                        "attr":{
+                            "button-type":"default",
+                            "button-content":"Drink!",
+                            "header":"Drink",
+                            "subheader":"more Coke."
+                        }
+                    }
+                ]
+            },
+            {
+                "attr":{
+                    "row":true
+                },
+                "children":[],
+                "components":[
+                    {
+                        "type":"jumbotron",
+                        "attr":{
+                            "button-type":"info",
+                            "button-content":"Drink!",
+                            "header":"Seriously",
+                            "subheader":"Drink it."
+                        }
+                    }
+                ]
+            }
+        ],
+        // Components are Bootstrap components
+        "components":[]
+    }
+}

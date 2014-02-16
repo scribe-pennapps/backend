@@ -6,16 +6,19 @@
         <meta charset="utf-8">
         <title>Inscription {{ identifier }}</title>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/{{ identifier }}">
+        <link rel="stylesheet" href="/css/{{ identifier }}.css">
     </head>
     <body>
-        <div class="container">
-        {% for element in screen.elements %}
-            {% if element.type == 'div' %}
-                
-            {% endif %}
+        {{ build.navbar(screen.navbar) }}
+        <div class="container" style="background-color:#6495ed">
+        {% for div in screen.container.children recursive %}
+            <div>
+                {{ loop(div.children) }}
+                {{ build.components(div) }}
+            </div>
         {% endfor %}
         </div>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     </body>
 </html>

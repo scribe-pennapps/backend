@@ -40,19 +40,27 @@ def main():
 def make_website():
     assert request.method == 'POST'
     content = request.form.get('content')
+    print(content)
     if not content:
-        response = {'Error':'No content found.'}
-        return make_response(json.dumps(response), 400, mimetype='application/json')
+        response = make_response(json.dumps({'Error':'No content found.'}), 400)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
     try:
         content = json.loads(content)
     except ValueError:
-        response = {'Error':'Invalid JSON.'}
+        response = make_response(json.dumps({'Error':'Invalid JSON.'}), 400)
+        response.headers['Content-Type'] = 'application/json'
+        return response
     # Generate Markup Page
     identifier = random_string()
     html = render_template('page.html', screen=content, identifier=identifier)
     session = {'html':html, 'identifier':identifier}
     session_id = sessions.insert(session)
     print('Created session %s with MongoDB ID %s.' % (identifier, str(session_id)))
+    response = make_response(json.dumps({'Success':'Page generated.', 'SessionID':identifier}))
+    response.headers['Content-Type'] = 'application/json'
+    return response
 
 
 
@@ -70,11 +78,11 @@ def get_website(page):
     
 @app.route('/css/<page>')
 def get_css(page):
-    return '// Who the hell wants actually dynamically-generated CSS!?!'
+    response = make_response('//Fuck this shit.')
+    response.headers['Content-Type'] = 'text/css'
+    return response
 
 
 if __name__ == '__main__':
-    print('Starting Scribe. You are now entering a hard hat area. '
-          'Enter at your own risk.')
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
