@@ -13,6 +13,7 @@ from pymongo import MongoClient
 import json
 import random
 import string
+import os
 
 
 # Configs
@@ -35,6 +36,23 @@ def main():
     response = make_response('Watch the magic ensue.', 200)
     response.headers['Content-Type'] = 'text/plain'
     return response
+
+@app.route('/upload', methods=['POST'])
+def function():
+    assert request.method == 'POST'
+    identifier = random_string()
+    image = request.form.get('image')
+    if not image:
+        response = make_response(json.dumps({'Error':'No image found.'}), 400)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    # Incase id is inplace
+    os.system('rm -rf cache/%s.png' % identifier)
+    os.system('touch cache/%s.png' % identifier)
+    cache = open('cache/%s.png' % identifier, 'wb')
+    cache.write(image)
+    cache.close()
+
 
 @app.route('/make_site', methods=['POST'])
 def make_website():

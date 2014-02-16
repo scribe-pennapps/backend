@@ -2,7 +2,7 @@
     "navbar": {
         "inverse": true,
         "stuck-top": true,
-        "title": true,
+        "title": "Coke",
         "elements":[
             "Hello",
             "World"
