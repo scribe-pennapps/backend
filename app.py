@@ -20,7 +20,7 @@ import os
 
 # Configs
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
+UPLOAD_FOLDER = 'cache/'
 
 
 # Hacked shit
