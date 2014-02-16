@@ -56,7 +56,7 @@ def function():
     cache.close()
 
     # Cache has been written. Time to get the real shit going.
-    parse = subprocess.check_output(['scribe-process', img]).json()
+    parse = json.loads(subprocess.check_output(['scribe-process', img]))
     print parse
 
     response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
