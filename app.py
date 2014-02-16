@@ -112,9 +112,9 @@ def function():
                         'attr':{
                             'button-type':'default',
                             # 'button-content':div['children'][0]['attr']['content'],
-                            'button-content':'Click!'
+                            'button-content':'Click!',
                             # 'header':div['attr']['content'],
-                            'header':'Scribe. Pure creation.'
+                            'header':'Scribe. Pure creation.',
                             # 'subheader':div['attr'].get('subheader', '')
                             'subheader':'Yeezus brought us through our struggles.'
                         }
