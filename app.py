@@ -40,18 +40,25 @@ def main():
 @app.route('/upload', methods=['POST'])
 def function():
     assert request.method == 'POST'
+    # Prepares session id.
     identifier = random_string()
+    img = 'cache/%s.png' % identifier
     image = request.form.get('image')
     if not image:
         response = make_response(json.dumps({'Error':'No image found.'}), 400)
         response.headers['Content-Type'] = 'application/json'
         return response
-    # Incase id is inplace
-    os.system('rm -rf cache/%s.png' % identifier)
-    os.system('touch cache/%s.png' % identifier)
-    cache = open('cache/%s.png' % identifier, 'wb')
+    # Incase id is in place
+    os.system('rm -rf %s' % img)
+    os.system('touch %s' % img)
+    cache = open(img, 'wb')
     cache.write(image)
     cache.close()
+
+    # Cache has been written. Time to get the real shit going.
+    parse = subprocess.check_output(['scribe-process', img]).json()
+    print parse
+
     response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
     response.headers['Content-Type'] = 'application/json'
     return response
