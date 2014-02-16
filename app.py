@@ -10,6 +10,8 @@ from flask import render_template
 
 from pymongo import MongoClient
 
+from werkzeug.utils import secure_filename
+
 import json
 import random
 import string
@@ -57,7 +59,7 @@ def function():
         response = make_response(json.dumps({'Error':'No image found.'}), 400)
         response.headers['Content-Type'] = 'application/json'
         return response
-    filename = secure_filename('img')
+    filename = secure_filename(img)
     image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print(request.form)
     # Incase id is in place
