@@ -1,3 +1,6 @@
+{% import 'build.html' as build %}
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,7 +33,6 @@
                 {{ build.jumbotron('Hello World!', 'I\'m a demo.', buttoncontent='Get started.') }}
                 {{ build['thumbnail-row']()}}
             </div>
-        {% endfor %}
         </div>
         <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
