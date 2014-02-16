@@ -17,6 +17,12 @@ import os
 
 
 # Configs
+
+# Hacked shit
+JUMBOTRON_ELEMENTS = 3
+TILE_ROW_ELEMENTS = 2
+
+# Legit stuff (in comparision)
 DATABASE = 'inscriptions'
 
 app = Flask(__name__)
