@@ -44,14 +44,29 @@
     </div>
 {% endmacro %}
 
+{% macro tile(float=None) %}
+    <a href="#" class="thumbnail {{ 'pull-right' if float == 'right' }} {{ 'pull-left' if float == 'left' }}">
+      <img data-src="holder.js/200x40%/sky" alt="img">
+    </a>
+{% endmacro %}
+
+{% macro tile_row() %}
+    <div class="row">
+        {{ tile(float = 'left')}}
+        {{ tile(fload = 'right')}}
+    </div>
+{% endmacro %}
+
+
 {# Command mapper #}
 {% macro components(div) %}
     {% for component in div.components %}
         {% if component.type == 'btn-group' %}
             {{ button_group(component.attr.buttons) }}
         {% elif component.type == 'jumbotron' %}
-            {{ component }}
             {{ jumbotron(component.attr.header, component.attr.subheader, component.attr['button-type'], component.attr['button-content']) }}
+        {% elif component.type == 'thumbnail-row' %}
+            {{ tile_row() }}
         {% endif %}
     {% endfor %}
 {% endmacro %}
