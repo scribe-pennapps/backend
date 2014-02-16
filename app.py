@@ -98,7 +98,7 @@ def function():
     screen['navbar']['inverse'] = True
     screen['navbar']['stuck-top'] = True
     screen['navbar']['title'] = 'Scribe' #parse['children'][0]['attr']['content']
-    screen['navbar']['elements'] = ['Home', 'About', 'Contact', 'Unicorns'] #parse['children'][0]['attr']['elements']
+    screen['navbar']['elements'] = ['Home'] #parse['children'][0]['attr']['elements']
 
     screen['container'] = dict()
     screen['container']['attr'] = []
@@ -118,11 +118,11 @@ def function():
                         'attr':{
                             'button-type':'default',
                             # 'button-content':div['children'][0]['attr']['content'],
-                            'button-content':'Click!',
+                            'button-content':'Get Started',
                             # 'header':div['attr']['content'],
-                            'header':'Scribe. Pure creation.',
+                            'header':'Hello World!',
                             # 'subheader':div['attr'].get('subheader', '')
-                            'subheader':'Yeezus brought us through our struggles.'
+                            'subheader':'This is a demo.'
                         }
                     }
                 ]
