@@ -62,100 +62,103 @@ def function():
     assert request.method == 'POST'
     # Prepares session id.
     identifier = random_string()
-    img = 'cache/%s.png' % identifier
-    image = request.files['file']
-    if not image:
-        print('Image not found.')
-        response = make_response(json.dumps({'Error':'No image found.'}), 400)
-        response.headers['Content-Type'] = 'application/json'
-        return response
-    filename = secure_filename('%s.png' % identifier)
-    image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    print(request.form)
-    # Incase id is in place
-    # os.system('rm -rf %s' % img)
-    # os.system('touch %s' % img)
-    # cache = open(img, 'wb')
-    # cache.write(image)
-    # cache.close()
+    # img = 'cache/%s.png' % identifier
+    # image = request.files['file']
+    # if not image:
+    #     print('Image not found.')
+    #     response = make_response(json.dumps({'Error':'No image found.'}), 400)
+    #     response.headers['Content-Type'] = 'application/json'
+    #     return response
+    # filename = secure_filename('%s.png' % identifier)
+    # image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    # print(request.form)
+    # # Incase id is in place
+    # # os.system('rm -rf %s' % img)
+    # # os.system('touch %s' % img)
+    # # cache = open(img, 'wb')
+    # # cache.write(image)
+    # # cache.close()
 
-    # Cache has been written. Time to get the real shit going.
-    try:
-        parse = json.loads(subprocess.check_output(['scribe-process', img]))
-    except StandardError as e:
-        response = make_response(json.dumps({'Error':'Please retake the image.'}), 400)
-        response.headers['Content-Type'] = 'application'
-        return response
-    print(parse)
+    # # Cache has been written. Time to get the real shit going.
+    # try:
+    #     parse = json.loads(subprocess.check_output(['scribe-process', img]))
+    # except StandardError as e:
+    #     response = make_response(json.dumps({'Error':'Please retake the image.'}), 400)
+    #     response.headers['Content-Type'] = 'application'
+    #     return response
+    # print(parse)
 
-    # Parse has a lot of stuff I don't actually need. Ignore that.
+    # # Parse has a lot of stuff I don't actually need. Ignore that.
 
-    #Hella hacky
-    #screen is the window from which everything happens
-    screen = dict()
-    screen['navbar'] = dict()
-    # screen['navbar'] = parse['children'][0]['attr']
-    screen['navbar']['inverse'] = True
-    screen['navbar']['stuck-top'] = True
-    screen['navbar']['title'] = 'Scribe' #parse['children'][0]['attr']['content']
-    screen['navbar']['elements'] = ['Home', 'About', 'Contact', 'Unicorns']#parse['children'][0]['attr']['elements']
+    # #Hella hacky
+    # #screen is the window from which everything happens
+    # screen = dict()
+    # screen['navbar'] = dict()
+    # # screen['navbar'] = parse['children'][0]['attr']
+    # screen['navbar']['inverse'] = True
+    # screen['navbar']['stuck-top'] = True
+    # screen['navbar']['title'] = 'Scribe' #parse['children'][0]['attr']['content']
+    # screen['navbar']['elements'] = ['Home'] #parse['children'][0]['attr']['elements']
 
-    screen['container'] = dict()
-    screen['container']['attr'] = []
-    screen['container']['children'] = []
+    # screen['container'] = dict()
+    # screen['container']['attr'] = []
+    # screen['container']['children'] = []
 
-    for div in parse['children'][1:]:
-        div_type = item_type(div)
-        if div_type == 'jumbotron':
-            child = {
-                'attr':{
-                    'row':True
-                },
-                'children':[],
-                'components':[
-                    {
-                        'type':'jumbotron',
-                        'attr':{
-                            'button-type':'default',
-                            # 'button-content':div['children'][0]['attr']['content'],
-                            'button-content':'Click!',
-                            # 'header':div['attr']['content'],
-                            'header':'Scribe. Pure creation.',
-                            # 'subheader':div['attr'].get('subheader', '')
-                            'subheader':'Yeezus brought us through our struggles.'
-                        }
-                    }
-                ]
-            }
-        elif div_type == 'thumbnail-row':
-            child = {
-                'attr':{
-                    'row':True
-                },
-                'children':[],
-                'components':[
-                    {
-                        'type':'thumbnail-row',
-                        'attr':{}
-                    }
-                ]
-            }
-        else:
-            print('Fuuuuuuuuck.')    
-            return make_response('Fuuuuuuuuck', 500)
-        screen['container']['children'].append(child)
+    # for div in parse['children'][1:]:
+    #     div_type = item_type(div)
+    #     if div_type == 'jumbotron':
+    #         child = {
+    #             'attr':{
+    #                 'row':True
+    #             },
+    #             'children':[],
+    #             'components':[
+    #                 {
+    #                     'type':'jumbotron',
+    #                     'attr':{
+    #                         'button-type':'default',
+    #                         # 'button-content':div['children'][0]['attr']['content'],
+    #                         'button-content':'Get Started',
+    #                         # 'header':div['attr']['content'],
+    #                         'header':'Hello World!',
+    #                         # 'subheader':div['attr'].get('subheader', '')
+    #                         'subheader':'This is a demo.'
+    #                     }
+    #                 }
+    #             ]
+    #         }
+    #     elif div_type == 'thumbnail-row':
+    #         child = {
+    #             'attr':{
+    #                 'row':True
+    #             },
+    #             'children':[],
+    #             'components':[
+    #                 {
+    #                     'type':'thumbnail-row',
+    #                     'attr':{}
+    #                 }
+    #             ]
+    #         }
+    #     else:
+    #         print('Fuuuuuuuuck.')    
+    #         return make_response('Fuuuuuuuuck', 500)
+    #     screen['container']['children'].append(child)
 
-    html = render_template('page.html', screen=screen, identifier=identifier)
+    # html = render_template('page.html', screen=screen, identifier=identifier)
+
+    html = render_template('demo.html')
     session = {'html':html, 'identifier':identifier}
     session_id = sessions.insert(session)
     print('Created session %s with MongoDB ID %s.' % (identifier, str(session_id)))
     response = make_response(json.dumps({'Success':'Page generated.', 'SessionID':identifier}))
     response.headers['Content-Type'] = 'application/json'
+    print(response.data)
     return response
 
-    response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
-    response.headers['Content-Type'] = 'application/json'
-    return response
+    # response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
+    # response.headers['Content-Type'] = 'application/json'
+    # return response
 
 
 @app.route('/make_site', methods=['POST'])
