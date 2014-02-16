@@ -61,6 +61,7 @@ def function():
     img = 'cache/%s.png' % identifier
     image = request.files['file']
     if not image:
+        print('Image not found.')
         response = make_response(json.dumps({'Error':'No image found.'}), 400)
         response.headers['Content-Type'] = 'application/json'
         return response
