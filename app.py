@@ -153,7 +153,7 @@ def function():
     print('Created session %s with MongoDB ID %s.' % (identifier, str(session_id)))
     response = make_response(json.dumps({'Success':'Page generated.', 'SessionID':identifier}))
     response.headers['Content-Type'] = 'application/json'
-    print(repsonse)
+    print(response)
     return response
 
     # response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
