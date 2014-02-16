@@ -147,6 +147,7 @@ def function():
 
     # html = render_template('page.html', screen=screen, identifier=identifier)
 
+    return 'Hi'
     html = render_template('demo.html')
     session = {'html':html, 'identifier':identifier}
     session_id = sessions.insert(session)
