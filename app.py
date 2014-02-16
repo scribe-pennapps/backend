@@ -68,11 +68,11 @@ def function():
     image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print(request.form)
     # Incase id is in place
-    os.system('rm -rf %s' % img)
-    os.system('touch %s' % img)
-    cache = open(img, 'wb')
-    cache.write(image)
-    cache.close()
+    # os.system('rm -rf %s' % img)
+    # os.system('touch %s' % img)
+    # cache = open(img, 'wb')
+    # cache.write(image)
+    # cache.close()
 
     # # Cache has been written. Time to get the real shit going.
     # parse = json.loads(subprocess.check_output(['scribe-process', img]))
