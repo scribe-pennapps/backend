@@ -20,6 +20,9 @@ import os
 
 # Configs
 
+UPLOAD_FOLDER = '/path/to/the/uploads'
+
+
 # Hacked shit
 JUMBOTRON_ELEMENTS = 3
 TILE_ROW_ELEMENTS = 2
@@ -28,6 +31,8 @@ TILE_ROW_ELEMENTS = 2
 DATABASE = 'inscriptions'
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Mongo
 client = MongoClient('localhost', 27017)
