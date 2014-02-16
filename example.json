@@ -45,6 +45,18 @@
                         }
                     }
                 ]
+            },
+            {
+                "attr":{
+                    "row":true
+                },
+                "children":[],
+                "components":[
+                    {
+                        "type":"thumbnail-row",
+                        "attr":{}
+                    }
+                ]
             }
         ],
         // Components are Bootstrap components

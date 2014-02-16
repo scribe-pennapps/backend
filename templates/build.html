@@ -45,15 +45,15 @@
 {% endmacro %}
 
 {% macro tile(float=None) %}
-    <a href="#" class="thumbnail {{ 'pull-right' if float == 'right' }} {{ 'pull-left' if float == 'left' }}">
-      <img data-src="holder.js/200x40%/sky" alt="img">
+    <a href="#" class="thumbnail {#{{ 'pull-right' if float == 'right' }} {{ 'pull-left' if float == 'left' }}#}">
+      <img data-src="holder.js/200x40%" alt="img">
     </a>
 {% endmacro %}
 
 {% macro tile_row() %}
     <div class="row">
         {{ tile(float = 'left')}}
-        {{ tile(fload = 'right')}}
+        {{ tile(float = 'right')}}
     </div>
 {% endmacro %}
 
