@@ -44,7 +44,10 @@ def random_string(length=8):
     return random.choice(string.letters) + ''.join([random.choice(string.letters + string.digits) for n in xrange(length-1)])
 
 def item_type(div):
-    pass
+    if len(div['children']) == 1:
+        return 'jumbotron'
+    else:
+        return 'thumbnail-row'
 
 @app.route('/')
 def main():
@@ -75,71 +78,74 @@ def function():
     # cache.write(image)
     # cache.close()
 
-    # # Cache has been written. Time to get the real shit going.
-    # parse = json.loads(subprocess.check_output(['scribe-process', img]))
-    # print(parse)
+    # Cache has been written. Time to get the real shit going.
+    parse = json.loads(subprocess.check_output(['scribe-process', img]))
+    print(parse)
 
     # Parse has a lot of stuff I don't actually need. Ignore that.
 
-    # #Hella hacky
-    # #screen is the window from which everything happens
-    # screen = dict()
-    # screen['navbar'] = dict()
-    # # screen['navbar'] = parse['children'][0]['attr']
-    # screen['navbar']['inverse'] = True
-    # screen['navbar']['stuck-top'] = True
-    # screen['navbar']['title'] = parse['children'][0]['attr']['content']
-    # # screen['navbar']['elements'] = parse['children'][0]['attr']['elements']
+    #Hella hacky
+    #screen is the window from which everything happens
+    screen = dict()
+    screen['navbar'] = dict()
+    # screen['navbar'] = parse['children'][0]['attr']
+    screen['navbar']['inverse'] = True
+    screen['navbar']['stuck-top'] = True
+    screen['navbar']['title'] = 'Scribe' #parse['children'][0]['attr']['content']
+    # screen['navbar']['elements'] = parse['children'][0]['attr']['elements']
 
-    # screen['container'] = dict()
-    # screen['container']['attr'] = []
-    # screen['container']['children'] = []
+    screen['container'] = dict()
+    screen['container']['attr'] = []
+    screen['container']['children'] = []
 
-    # for div in parse['children'][1:]:
-    #     div_type = item_type(div)
-    #     if div_type = 'jumbotron':
-    #         child = {
-    #             'attr':{
-    #                 'row':True
-    #             },
-    #             'children':[],
-    #             'components':[
-    #                 {
-    #                     'type':'jumbotron',
-    #                     'attr':{
-    #                         'button-type':'default',
-    #                         'button-content':div['children'][0]['attr']['content'],
-    #                         'header':div['attr']['content'],
-    #                         'subheader':div['attr'].get('subheader', '')
-    #                     }
-    #                 }
-    #             ]
-    #         }
-    #     elif div_type = 'thumbnail-row':
-    #         child = {
-    #             'attr':{
-    #                 'row':True
-    #             },
-    #             'children':[],
-    #             'components':[
-    #                 {
-    #                     'type':'thumbnail-row',
-    #                     'attr':{}
-    #                 }
-    #             ]
-    #         }
-    #     else:
-    #         print('Fuuuuuuuuck.')    
-    #         return make_response('Fuuuuuuuuck', 500)
-    #     screen['container']['children'].append(child)
+    for div in parse['children'][1:]:
+        div_type = item_type(div)
+        if div_type = 'jumbotron':
+            child = {
+                'attr':{
+                    'row':True
+                },
+                'children':[],
+                'components':[
+                    {
+                        'type':'jumbotron',
+                        'attr':{
+                            'button-type':'default',
+                            # 'button-content':div['children'][0]['attr']['content'],
+                            'button-content':'Click!'
+                            # 'header':div['attr']['content'],
+                            'header':'Scribe. Pure creation.'
+                            # 'subheader':div['attr'].get('subheader', '')
+                            'subheader':'Yeezus brought us through our struggles.'
+                        }
+                    }
+                ]
+            }
+        elif div_type = 'thumbnail-row':
+            child = {
+                'attr':{
+                    'row':True
+                },
+                'children':[],
+                'components':[
+                    {
+                        'type':'thumbnail-row',
+                        'attr':{}
+                    }
+                ]
+            }
+        else:
+            print('Fuuuuuuuuck.')    
+            return make_response('Fuuuuuuuuck', 500)
+        screen['container']['children'].append(child)
 
-    # html = render_template('page.html', screen=screen, identifier=identifier)
-    # session = {'html':html, 'identifier':identifier}
-    # session_id = sessions.insert(session)
-    # print('Created session %s with MongoDB ID %s.' % (identifier, str(session_id)))
-    # response = make_response(json.dumps({'Success':'Page generated.', 'SessionID':identifier}))
-    # response.headers['Content-Type'] = 'application/json'
-    # return response
+    html = render_template('page.html', screen=screen, identifier=identifier)
+    session = {'html':html, 'identifier':identifier}
+    session_id = sessions.insert(session)
+    print('Created session %s with MongoDB ID %s.' % (identifier, str(session_id)))
+    response = make_response(json.dumps({'Success':'Page generated.', 'SessionID':identifier}))
+    response.headers['Content-Type'] = 'application/json'
+    return response
 
     response = make_response(json.dumps({'Success':'Image uploaded.'}), 200)
     response.headers['Content-Type'] = 'application/json'
